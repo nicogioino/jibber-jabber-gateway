@@ -1,4 +1,4 @@
-package com.austral.jibberjabbergateway.dtos;
+package com.austral.jibberjabbergateway.dtos.users;
 
 
 import com.austral.jibberjabbergateway.models.AppUser;

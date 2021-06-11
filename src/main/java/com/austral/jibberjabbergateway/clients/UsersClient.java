@@ -1,8 +1,8 @@
 package com.austral.jibberjabbergateway.clients;
 
-import com.austral.jibberjabbergateway.dtos.CreateUserDto;
-import com.austral.jibberjabbergateway.dtos.ReducedUserDto;
-import com.austral.jibberjabbergateway.dtos.UserListingDto;
+import com.austral.jibberjabbergateway.dtos.users.CreateUserDto;
+import com.austral.jibberjabbergateway.dtos.users.ReducedUserDto;
+import com.austral.jibberjabbergateway.dtos.users.UserListingDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;

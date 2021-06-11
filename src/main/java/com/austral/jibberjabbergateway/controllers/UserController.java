@@ -1,9 +1,9 @@
 package com.austral.jibberjabbergateway.controllers;
 
 import com.austral.jibberjabbergateway.clients.UsersClient;
-import com.austral.jibberjabbergateway.dtos.CreateUserDto;
-import com.austral.jibberjabbergateway.dtos.ReducedUserDto;
-import com.austral.jibberjabbergateway.dtos.UserListingDto;
+import com.austral.jibberjabbergateway.dtos.users.CreateUserDto;
+import com.austral.jibberjabbergateway.dtos.users.ReducedUserDto;
+import com.austral.jibberjabbergateway.dtos.users.UserListingDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
