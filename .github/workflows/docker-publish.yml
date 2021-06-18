@@ -67,5 +67,5 @@ jobs:
           echo IMAGE_ID=$IMAGE_ID
           echo BRANCH_NAME=$BRANCH_NAME
 
-          docker tag $IMAGE_NAME $IMAGE_ID:$BRANCH_NAME
-          docker push $IMAGE_ID:$BRANCH_NAME
+          docker tag $IMAGE_NAME $IMAGE_ID:$BRANCH_NAME:latest
+          docker push $IMAGE_ID:$BRANCH_NAME:latest
