@@ -43,4 +43,10 @@ public class UsersClient {
         ResponseEntity<ReducedUserDto> response =  restTemplate.postForEntity(url,editedUser,ReducedUserDto.class);
         return response.getBody();
     }
+
+    public ReducedUserDto findByUsername (String username) {
+        String url = USER_SERVICE_URL + "/by-username/" + username;
+        ResponseEntity<ReducedUserDto> response = restTemplate.getForEntity(url,ReducedUserDto.class);
+        return response.getBody();
+    }
 }

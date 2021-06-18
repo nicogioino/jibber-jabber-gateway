@@ -37,4 +37,9 @@ public class UserController {
     public ReducedUserDto editUser(@RequestBody ReducedUserDto reducedUserDto) {
         return usersClient.editUser(reducedUserDto);
     }
+
+    @GetMapping("/by-username/{username}")
+    public ReducedUserDto findByUsername(@PathVariable String username) {
+        return usersClient.findByUsername(username);
+    }
 }
