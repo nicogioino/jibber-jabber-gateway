@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 public class PostsClient {
-    private final String USER_SERVICE_URL = "http://host.docker.internal:8082/post";
+    private final String USER_SERVICE_URL = "http://jibber-jabber-posts:8082/post";
     private final RestTemplate restTemplate;
     private final TokenUtils tokenUtils;
 
