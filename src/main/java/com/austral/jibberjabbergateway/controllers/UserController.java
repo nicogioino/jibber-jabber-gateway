@@ -32,4 +32,9 @@ public class UserController {
     private ReducedUserDto register (@RequestBody CreateUserDto createUserDto) {
         return usersClient.createUser(createUserDto);
     }
+
+    @PostMapping("/edit")
+    public ReducedUserDto editUser(@RequestBody ReducedUserDto reducedUserDto) {
+        return usersClient.editUser(reducedUserDto);
+    }
 }
