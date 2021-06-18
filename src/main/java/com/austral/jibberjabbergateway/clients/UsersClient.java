@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 public class UsersClient {
-    private final String USER_SERVICE_URL = "http://localhost:8081/users";
+    private final String USER_SERVICE_URL = "http://host.docker.internal:8081/users";
     private final RestTemplate restTemplate;
 
     public UsersClient() {
