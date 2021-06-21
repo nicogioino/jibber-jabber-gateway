@@ -2,9 +2,7 @@ name: Docker publish
 
 on:
   push:
-    # Publish `v1.2.3` tags as releases.
-    tags:
-      - v*
+    branches: [ master, dev]
 
 env:
   IMAGE_NAME: jibber-jabber-gateway
