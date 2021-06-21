@@ -5,7 +5,7 @@ on:
     branches: [master]
 
 env:
-  IMAGE_NAME: jibber-jabber-gateway-master
+  IMAGE_NAME: jibber-jabber-gateway-prod
 
 jobs:
   # Run tests.
