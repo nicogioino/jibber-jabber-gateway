@@ -1,11 +1,11 @@
-name: Docker publish
+name: Docker publish Dev
 
 on:
   push:
-    branches: [ master, dev]
+    branches: [dev]
 
 env:
-  IMAGE_NAME: jibber-jabber-gateway
+  IMAGE_NAME: jibber-jabber-gateway-dev
 
 jobs:
   # Run tests.
