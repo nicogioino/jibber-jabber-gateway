@@ -47,7 +47,7 @@ public class PostsClient {
 
     public PostListingDto findPostByCreatorId(String creatorId) {
         String userId = tokenUtils.getLoggedUser().getId();
-        String url = POST_SERVICE_URL + "/by-user/" + userId;
+        String url = POST_SERVICE_URL + "/by-user/" + creatorId;
         ResponseEntity<PostListingDto> response = restTemplate.getForEntity(url,PostListingDto.class);
         return response.getBody();
     }
