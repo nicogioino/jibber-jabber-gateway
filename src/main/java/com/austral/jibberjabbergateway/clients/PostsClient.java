@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 public class PostsClient {
-    private final String USER_SERVICE_URL = "http://jibber-jabber-posts:8080/post";
+    private final String POST_SERVICE_URL = "http://jibber-jabber-posts:8080/post";
     private final RestTemplate restTemplate;
     private final TokenUtils tokenUtils;
 
@@ -23,7 +23,7 @@ public class PostsClient {
     }
 
     public PostInfoDto createPost(PostCreationDto postCreationDto) {
-        String url = USER_SERVICE_URL + "/create";
+        String url = POST_SERVICE_URL + "/create";
         String userId = tokenUtils.getLoggedUser().getId();
 
         HttpHeaders headers = new org.springframework.http.HttpHeaders();
@@ -35,13 +35,20 @@ public class PostsClient {
     }
 
     public PostListingDto getAllPosts() {
-        String url = USER_SERVICE_URL + "/get-all";
+        String url = POST_SERVICE_URL + "/get-all";
         ResponseEntity<PostListingDto> response = restTemplate.getForEntity(url, PostListingDto.class);
         return response.getBody();
     }
 
     public void deletePost(Long postId) {
-        String url = USER_SERVICE_URL + "/delete/" + postId;
+        String url = POST_SERVICE_URL + "/delete/" + postId;
         restTemplate.delete(url);
+    }
+
+    public PostListingDto findPostByCreatorId(String creatorId) {
+        String userId = tokenUtils.getLoggedUser().getId();
+        String url = POST_SERVICE_URL + "/by-user/" + userId;
+        ResponseEntity<PostListingDto> response = restTemplate.getForEntity(url,PostListingDto.class);
+        return response.getBody();
     }
 }

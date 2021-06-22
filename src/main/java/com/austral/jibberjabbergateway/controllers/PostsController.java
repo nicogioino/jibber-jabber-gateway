@@ -32,4 +32,9 @@ public class PostsController {
     public void deletePost(@PathVariable Long id) {
         postsClient.deletePost(id);
     }
+
+    @GetMapping("/by-user/{userId}")
+    public PostListingDto getPostsByUserId(@PathVariable String userId) {
+        return postsClient.findPostByCreatorId(userId);
+    }
 }
