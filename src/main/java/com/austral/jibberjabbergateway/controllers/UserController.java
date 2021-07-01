@@ -42,4 +42,14 @@ public class UserController {
     public ReducedUserDto findByUsername(@PathVariable String username) {
         return usersClient.findByUsername(username);
     }
+
+    @PostMapping("/follow/{username}")
+    public void followUser(@PathVariable String username) {
+        usersClient.followUser(username);
+    }
+
+    @PostMapping("/unfollow/{username}")
+    public void unfollowUser(@PathVariable String username) {
+        usersClient.unfollowUser(username);
+    }
 }
