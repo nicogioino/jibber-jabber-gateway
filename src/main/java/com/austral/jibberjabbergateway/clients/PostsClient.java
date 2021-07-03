@@ -35,7 +35,8 @@ public class PostsClient {
     }
 
     public PostListingDto getAllPosts() {
-        String url = POST_SERVICE_URL + "/get-all";
+        String userId = tokenUtils.getLoggedUser().getId();
+        String url = POST_SERVICE_URL + "/get-all/" + userId;
         ResponseEntity<PostListingDto> response = restTemplate.getForEntity(url, PostListingDto.class);
         return response.getBody();
     }
