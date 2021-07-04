@@ -84,7 +84,6 @@ jobs:
           key: ${{ secrets.VM_SSH_PRIVATE_KEY }}
           envs: REPO_OWNER, GITHUB_TOKEN
           script: |
-            sudo su
             cd jibber-jabber-infraestructure
-            docker system prune --force
-            ./deploy-prod.sh
+            sudo docker system prune --force
+            sudo ./deploy-prod.sh

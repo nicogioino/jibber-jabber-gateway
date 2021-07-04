@@ -69,7 +69,7 @@ jobs:
           docker push $IMAGE_ID:latest
   azure-deploy:
     needs: push
-    name: Deploy to Azure Prod VM
+    name: Deploy to Azure Dev VM
     runs-on: ubuntu-latest
     steps:
       - name: SSH Connection
@@ -83,8 +83,7 @@ jobs:
           key: ${{ secrets.VM_SSH_PRIVATE_KEY }}
           envs: REPO_OWNER, GITHUB_TOKEN
           script: |
-            sudo su
             cd jibber-jabber-infraestructure
-            docker system prune --force
-            ./deploy-dev.sh
+            sudo docker system prune --force
+            sudo ./deploy-dev.sh
 
