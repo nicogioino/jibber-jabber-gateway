@@ -87,5 +87,5 @@ jobs:
             cd ssl-certificate-dev
             sudo docker-compose down
             sudo docker system prune --all --force
-            sudo docker compose up detach
+            sudo docker compose up --detach
 
