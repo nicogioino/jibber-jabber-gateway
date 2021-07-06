@@ -86,5 +86,5 @@ jobs:
             cd jibber-jabber-infraestructure
             sudo docker-compose down
             sudo docker system prune --all --force
-            sudo docker-compose up --detach
+            sudo docker-compose -f docker-compose-dev.yml up --detach
 
