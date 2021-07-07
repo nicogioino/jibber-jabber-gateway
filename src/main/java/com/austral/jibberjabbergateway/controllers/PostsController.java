@@ -37,4 +37,14 @@ public class PostsController {
     public PostListingDto getPostsByUserId(@PathVariable String userId) {
         return postsClient.findPostByCreatorId(userId);
     }
+
+    @PostMapping("/like/{postId}")
+    public PostInfoDto likePost(@PathVariable Long postId) {
+        return postsClient.likePost(postId);
+    }
+
+    @PostMapping("/dislike/{postId}")
+    public PostInfoDto dislikePost (@PathVariable Long postId) {
+        return postsClient.dislike(postId);
+    }
 }

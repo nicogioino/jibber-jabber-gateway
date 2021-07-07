@@ -52,4 +52,24 @@ public class PostsClient {
         ResponseEntity<PostListingDto> response = restTemplate.getForEntity(url,PostListingDto.class);
         return response.getBody();
     }
+
+    public PostInfoDto likePost(Long postId) {
+        String url = POST_SERVICE_URL + "/like/" + postId;
+        String userId = tokenUtils.getLoggedUser().getId();
+        HttpHeaders headers = new org.springframework.http.HttpHeaders();
+        headers.add("userId", userId);
+        HttpEntity<PostCreationDto> httpEntity = new HttpEntity<>(headers);
+        ResponseEntity<PostInfoDto> response =  restTemplate.exchange(url,HttpMethod.POST,httpEntity,PostInfoDto.class);
+        return response.getBody();
+    }
+
+    public PostInfoDto dislike(Long postId) {
+        String url = POST_SERVICE_URL + "/dislike/" + postId;
+        String userId = tokenUtils.getLoggedUser().getId();
+        HttpHeaders headers = new org.springframework.http.HttpHeaders();
+        headers.add("userId", userId);
+        HttpEntity<PostCreationDto> httpEntity = new HttpEntity<>(headers);
+        ResponseEntity<PostInfoDto> response =  restTemplate.exchange(url,HttpMethod.POST,httpEntity,PostInfoDto.class);
+        return response.getBody();
+    }
 }
