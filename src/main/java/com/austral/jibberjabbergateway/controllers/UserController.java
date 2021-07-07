@@ -2,6 +2,7 @@ package com.austral.jibberjabbergateway.controllers;
 
 import com.austral.jibberjabbergateway.clients.UsersClient;
 import com.austral.jibberjabbergateway.dtos.users.CreateUserDto;
+import com.austral.jibberjabbergateway.dtos.users.EditUserDto;
 import com.austral.jibberjabbergateway.dtos.users.ReducedUserDto;
 import com.austral.jibberjabbergateway.dtos.users.UserListingDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +35,8 @@ public class UserController {
     }
 
     @PostMapping("/edit")
-    public ReducedUserDto editUser(@RequestBody ReducedUserDto reducedUserDto) {
-        return usersClient.editUser(reducedUserDto);
+    public ReducedUserDto editUser(@RequestBody EditUserDto editUserDto) {
+        return usersClient.editUser(editUserDto);
     }
 
     @GetMapping("/by-username/{username}")

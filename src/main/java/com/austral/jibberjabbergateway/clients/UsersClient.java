@@ -1,9 +1,6 @@
 package com.austral.jibberjabbergateway.clients;
 
-import com.austral.jibberjabbergateway.dtos.users.CreateUserDto;
-import com.austral.jibberjabbergateway.dtos.users.FollowUserRequestDto;
-import com.austral.jibberjabbergateway.dtos.users.ReducedUserDto;
-import com.austral.jibberjabbergateway.dtos.users.UserListingDto;
+import com.austral.jibberjabbergateway.dtos.users.*;
 import com.austral.jibberjabbergateway.repositories.UserRepository;
 import com.austral.jibberjabbergateway.security.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +40,7 @@ public class UsersClient {
         return response.getBody();
     }
 
-    public ReducedUserDto editUser(ReducedUserDto editedUser) {
+    public ReducedUserDto editUser(EditUserDto editedUser) {
         String userId = tokenUtils.getLoggedUser().getId();
         String url = USER_SERVICE_URL + "/edit/" + userId;
         ResponseEntity<ReducedUserDto> response = restTemplate.postForEntity(url, editedUser, ReducedUserDto.class);
