@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReducedUserDto {
+public class UserProfileDto {
 
     private String id;
 
@@ -24,15 +24,18 @@ public class ReducedUserDto {
 
     private int followingCount;
 
-    public static ReducedUserDto fromUser(AppUser appUser) {
-        return new ReducedUserDto(
+    boolean following;
+
+    public static UserProfileDto fromUser(AppUser appUser, boolean following) {
+        return new UserProfileDto(
                 appUser.getId(),
                 appUser.getFirstName(),
                 appUser.getLastName(),
                 appUser.getUsername(),
                 appUser.getEmail(),
                 appUser.getFollowers().size(),
-                appUser.getFollowing().size()
+                appUser.getFollowing().size(),
+                following
         );
     }
 }

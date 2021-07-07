@@ -18,5 +18,9 @@ public class PostInfoDto {
 
     String content;
 
+    int likes;
+
+    int dislikes;
+
     ReducedUserDto reducedUserDto;
 }

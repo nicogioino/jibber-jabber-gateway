@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 public class PostsClient {
-    private final String USER_SERVICE_URL = "http://jibber-jabber-posts:8080/post";
+    private final String POST_SERVICE_URL = "http://jibber-jabber-posts:8080/post";
     private final RestTemplate restTemplate;
     private final TokenUtils tokenUtils;
 
@@ -23,7 +23,7 @@ public class PostsClient {
     }
 
     public PostInfoDto createPost(PostCreationDto postCreationDto) {
-        String url = USER_SERVICE_URL + "/create";
+        String url = POST_SERVICE_URL + "/create";
         String userId = tokenUtils.getLoggedUser().getId();
 
         HttpHeaders headers = new org.springframework.http.HttpHeaders();
@@ -35,13 +35,41 @@ public class PostsClient {
     }
 
     public PostListingDto getAllPosts() {
-        String url = USER_SERVICE_URL + "/get-all";
+        String userId = tokenUtils.getLoggedUser().getId();
+        String url = POST_SERVICE_URL + "/get-all/" + userId;
         ResponseEntity<PostListingDto> response = restTemplate.getForEntity(url, PostListingDto.class);
         return response.getBody();
     }
 
     public void deletePost(Long postId) {
-        String url = USER_SERVICE_URL + "/delete/" + postId;
+        String url = POST_SERVICE_URL + "/delete/" + postId;
         restTemplate.delete(url);
+    }
+
+    public PostListingDto findPostByCreatorId(String creatorId) {
+        String userId = tokenUtils.getLoggedUser().getId();
+        String url = POST_SERVICE_URL + "/by-user/" + creatorId;
+        ResponseEntity<PostListingDto> response = restTemplate.getForEntity(url,PostListingDto.class);
+        return response.getBody();
+    }
+
+    public PostInfoDto likePost(Long postId) {
+        String url = POST_SERVICE_URL + "/like/" + postId;
+        String userId = tokenUtils.getLoggedUser().getId();
+        HttpHeaders headers = new org.springframework.http.HttpHeaders();
+        headers.add("userId", userId);
+        HttpEntity<PostCreationDto> httpEntity = new HttpEntity<>(headers);
+        ResponseEntity<PostInfoDto> response =  restTemplate.exchange(url,HttpMethod.POST,httpEntity,PostInfoDto.class);
+        return response.getBody();
+    }
+
+    public PostInfoDto dislike(Long postId) {
+        String url = POST_SERVICE_URL + "/dislike/" + postId;
+        String userId = tokenUtils.getLoggedUser().getId();
+        HttpHeaders headers = new org.springframework.http.HttpHeaders();
+        headers.add("userId", userId);
+        HttpEntity<PostCreationDto> httpEntity = new HttpEntity<>(headers);
+        ResponseEntity<PostInfoDto> response =  restTemplate.exchange(url,HttpMethod.POST,httpEntity,PostInfoDto.class);
+        return response.getBody();
     }
 }

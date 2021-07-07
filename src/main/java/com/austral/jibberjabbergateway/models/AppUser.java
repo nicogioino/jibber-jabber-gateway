@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table
@@ -29,11 +31,34 @@ public class AppUser {
 
     private String email;
 
+    @ElementCollection
+    private Set<String> followers;
+
+    @ElementCollection
+    private Set<String> following;
+
     public AppUser(String firstName, String lastName, String username, String password, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.password = password;
         this.email = email;
+        this.followers = new HashSet<>();
+    }
+
+    public void addFollower(String userId) {
+        followers.add(userId);
+    }
+
+    public void removeFollower(String userId) {
+        followers.remove(userId);
+    }
+
+    public void addFollowing(String userId) {
+        following.add(userId);
+    }
+
+    public void removeFollowing(String userId) {
+        following.remove(userId);
     }
 }

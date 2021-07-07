@@ -1,9 +1,7 @@
 package com.austral.jibberjabbergateway.controllers;
 
 import com.austral.jibberjabbergateway.clients.UsersClient;
-import com.austral.jibberjabbergateway.dtos.users.CreateUserDto;
-import com.austral.jibberjabbergateway.dtos.users.ReducedUserDto;
-import com.austral.jibberjabbergateway.dtos.users.UserListingDto;
+import com.austral.jibberjabbergateway.dtos.users.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,12 +32,22 @@ public class UserController {
     }
 
     @PostMapping("/edit")
-    public ReducedUserDto editUser(@RequestBody ReducedUserDto reducedUserDto) {
-        return usersClient.editUser(reducedUserDto);
+    public ReducedUserDto editUser(@RequestBody EditUserDto editUserDto) {
+        return usersClient.editUser(editUserDto);
     }
 
     @GetMapping("/by-username/{username}")
-    public ReducedUserDto findByUsername(@PathVariable String username) {
+    public UserProfileDto findByUsername(@PathVariable String username) {
         return usersClient.findByUsername(username);
+    }
+
+    @PostMapping("/follow/{username}")
+    public void followUser(@PathVariable String username) {
+        usersClient.followUser(username);
+    }
+
+    @PostMapping("/unfollow/{username}")
+    public void unfollowUser(@PathVariable String username) {
+        usersClient.unfollowUser(username);
     }
 }
