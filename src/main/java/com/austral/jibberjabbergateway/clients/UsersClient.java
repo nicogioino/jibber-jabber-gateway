@@ -1,9 +1,13 @@
 package com.austral.jibberjabbergateway.clients;
 
+import com.austral.jibberjabbergateway.dtos.posts.PostCreationDto;
 import com.austral.jibberjabbergateway.dtos.users.*;
 import com.austral.jibberjabbergateway.repositories.UserRepository;
 import com.austral.jibberjabbergateway.security.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -47,9 +51,13 @@ public class UsersClient {
         return response.getBody();
     }
 
-    public ReducedUserDto findByUsername(String username) {
+    public UserProfileDto findByUsername(String username) {
         String url = USER_SERVICE_URL + "/by-username/" + username;
-        ResponseEntity<ReducedUserDto> response = restTemplate.getForEntity(url, ReducedUserDto.class);
+        String userId = tokenUtils.getLoggedUser().getId();
+        HttpHeaders headers = new org.springframework.http.HttpHeaders();
+        headers.add("userId", userId);
+        HttpEntity<PostCreationDto> httpEntity = new HttpEntity<>(headers);
+        ResponseEntity<UserProfileDto> response = restTemplate.exchange(url, HttpMethod.GET,httpEntity,UserProfileDto.class);
         return response.getBody();
     }
 

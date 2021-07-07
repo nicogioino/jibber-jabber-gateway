@@ -1,10 +1,7 @@
 package com.austral.jibberjabbergateway.controllers;
 
 import com.austral.jibberjabbergateway.clients.UsersClient;
-import com.austral.jibberjabbergateway.dtos.users.CreateUserDto;
-import com.austral.jibberjabbergateway.dtos.users.EditUserDto;
-import com.austral.jibberjabbergateway.dtos.users.ReducedUserDto;
-import com.austral.jibberjabbergateway.dtos.users.UserListingDto;
+import com.austral.jibberjabbergateway.dtos.users.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,7 +37,7 @@ public class UserController {
     }
 
     @GetMapping("/by-username/{username}")
-    public ReducedUserDto findByUsername(@PathVariable String username) {
+    public UserProfileDto findByUsername(@PathVariable String username) {
         return usersClient.findByUsername(username);
     }
 
