@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @PostMapping("/edit")
-    public ReducedUserDto editUser(@RequestBody EditUserDto editUserDto) {
+    public ReducedUserDto editUser(@RequestBody ReducedUserDto editUserDto) {
         return usersClient.editUser(editUserDto);
     }
 
@@ -49,5 +49,10 @@ public class UserController {
     @PostMapping("/unfollow/{username}")
     public void unfollowUser(@PathVariable String username) {
         usersClient.unfollowUser(username);
+    }
+
+    @PostMapping("/edit/password")
+    public void editPassword(@RequestBody EditPasswordDto editPasswordDto) {
+        usersClient.editPassword(editPasswordDto);
     }
 }

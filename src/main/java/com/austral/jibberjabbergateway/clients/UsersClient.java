@@ -44,7 +44,7 @@ public class UsersClient {
         return response.getBody();
     }
 
-    public ReducedUserDto editUser(EditUserDto editedUser) {
+    public ReducedUserDto editUser(ReducedUserDto editedUser) {
         String userId = tokenUtils.getLoggedUser().getId();
         String url = USER_SERVICE_URL + "/edit/" + userId;
         ResponseEntity<ReducedUserDto> response = restTemplate.postForEntity(url, editedUser, ReducedUserDto.class);
@@ -79,5 +79,11 @@ public class UsersClient {
                 .getId();
         FollowUserRequestDto requestDto = new FollowUserRequestDto(userId, userToUnfollowId);
         restTemplate.postForEntity(url, requestDto, Void.class);
+    }
+
+    public void editPassword(EditPasswordDto editPasswordDto) {
+        String userId = tokenUtils.getLoggedUser().getId();
+        String url = USER_SERVICE_URL + "/edit/password/" + userId;
+        restTemplate.postForEntity(url,editPasswordDto,Void.class);
     }
 }
