@@ -76,7 +76,7 @@ public class UsersClient {
     }
 
     public void unfollowUser(String userToUnfollow) {
-        String url = USER_SERVICE_URL + "/follow";
+        String url = USER_SERVICE_URL + "/unfollow";
         String userId = tokenUtils.getLoggedUser().getId();
         String userToUnfollowId = userRepository.findByUsername(userToUnfollow)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"))
