@@ -28,7 +28,11 @@ public class UsersClient {
 
     public UserListingDto getAllUsers() {
         String url = USER_SERVICE_URL + "/get-all";
-        ResponseEntity<UserListingDto> response = restTemplate.getForEntity(url, UserListingDto.class);
+        String userId = tokenUtils.getLoggedUser().getId();
+        HttpHeaders headers = new org.springframework.http.HttpHeaders();
+        headers.add("userId", userId);
+        HttpEntity<PostCreationDto> httpEntity = new HttpEntity<>(headers);
+        ResponseEntity<UserListingDto> response = restTemplate.exchange(url,HttpMethod.GET,httpEntity, UserListingDto.class);
         return response.getBody();
     }
 
@@ -44,7 +48,7 @@ public class UsersClient {
         return response.getBody();
     }
 
-    public ReducedUserDto editUser(EditUserDto editedUser) {
+    public ReducedUserDto editUser(ReducedUserDto editedUser) {
         String userId = tokenUtils.getLoggedUser().getId();
         String url = USER_SERVICE_URL + "/edit/" + userId;
         ResponseEntity<ReducedUserDto> response = restTemplate.postForEntity(url, editedUser, ReducedUserDto.class);
@@ -72,12 +76,28 @@ public class UsersClient {
     }
 
     public void unfollowUser(String userToUnfollow) {
-        String url = USER_SERVICE_URL + "/follow";
+        String url = USER_SERVICE_URL + "/unfollow";
         String userId = tokenUtils.getLoggedUser().getId();
         String userToUnfollowId = userRepository.findByUsername(userToUnfollow)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"))
                 .getId();
         FollowUserRequestDto requestDto = new FollowUserRequestDto(userId, userToUnfollowId);
         restTemplate.postForEntity(url, requestDto, Void.class);
+    }
+
+    public void editPassword(EditPasswordDto editPasswordDto) {
+        String userId = tokenUtils.getLoggedUser().getId();
+        String url = USER_SERVICE_URL + "/edit/password/" + userId;
+        restTemplate.postForEntity(url,editPasswordDto,Void.class);
+    }
+
+    public UserProfileDto findById(String id) {
+        String url = USER_SERVICE_URL + "/by-id/" + id;
+        String userId = tokenUtils.getLoggedUser().getId();
+        HttpHeaders headers = new org.springframework.http.HttpHeaders();
+        headers.add("userId", userId);
+        HttpEntity<PostCreationDto> httpEntity = new HttpEntity<>(headers);
+        ResponseEntity<UserProfileDto> response = restTemplate.exchange(url, HttpMethod.GET,httpEntity,UserProfileDto.class);
+        return response.getBody();
     }
 }
