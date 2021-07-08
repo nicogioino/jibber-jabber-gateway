@@ -90,4 +90,14 @@ public class UsersClient {
         String url = USER_SERVICE_URL + "/edit/password/" + userId;
         restTemplate.postForEntity(url,editPasswordDto,Void.class);
     }
+
+    public UserProfileDto findById(String id) {
+        String url = USER_SERVICE_URL + "/by-id/" + id;
+        String userId = tokenUtils.getLoggedUser().getId();
+        HttpHeaders headers = new org.springframework.http.HttpHeaders();
+        headers.add("userId", userId);
+        HttpEntity<PostCreationDto> httpEntity = new HttpEntity<>(headers);
+        ResponseEntity<UserProfileDto> response = restTemplate.exchange(url, HttpMethod.GET,httpEntity,UserProfileDto.class);
+        return response.getBody();
+    }
 }
