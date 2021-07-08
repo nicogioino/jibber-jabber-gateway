@@ -28,7 +28,11 @@ public class UsersClient {
 
     public UserListingDto getAllUsers() {
         String url = USER_SERVICE_URL + "/get-all";
-        ResponseEntity<UserListingDto> response = restTemplate.getForEntity(url, UserListingDto.class);
+        String userId = tokenUtils.getLoggedUser().getId();
+        HttpHeaders headers = new org.springframework.http.HttpHeaders();
+        headers.add("userId", userId);
+        HttpEntity<PostCreationDto> httpEntity = new HttpEntity<>(headers);
+        ResponseEntity<UserListingDto> response = restTemplate.exchange(url,HttpMethod.GET,httpEntity, UserListingDto.class);
         return response.getBody();
     }
 
